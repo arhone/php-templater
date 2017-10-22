@@ -145,7 +145,7 @@ echo $Template->render(__DIR__ . '/slave.tpl');
 
 <?php $this->start('body')?>
     <div>Содержимое</div>
-<?=$this->end('body')?>
+<?$this->end('body')?>
 
 <?=$this->render(__DIR__ . '/default.tpl')?>
 ```
