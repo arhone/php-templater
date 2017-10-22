@@ -162,7 +162,7 @@ class Template implements TemplateInterface {
      * @param string $name
      * @return mixed
      */
-    public function __isset(string $name) {
+    public function __isset (string $name) {
         
         return $this->has($name);
         
@@ -197,12 +197,12 @@ class Template implements TemplateInterface {
      * htmlspecialchars() с исключениями
      * 
      * @param string $text
-     * @param array $tags
+     * @param array $tagList
      * @return string
      */
-    function specialChars (string $text, array $tags = []) : string {
+    public function specialChars (string $text, array $tagList = []) : string {
         
-        if (isset($tags['code']) || array_search('code', $tags) !== false) {
+        if (isset($tagList['code']) || array_search('code', $tagList) !== false) {
             
             preg_match_all('!<code[ a-zA-Zа-яА-Я0-9./"=:_@%?\-&#;]*>(.*?)</code>!isU', $text, $code);
             if (!empty($code[0])) {
@@ -217,14 +217,14 @@ class Template implements TemplateInterface {
             
         }
         
-        if (!empty($tags)) {
+        if (!empty($tagList)) {
             
             $pattern1     = [];
             $pattern2     = [];
             $replacement1 = [];
             $replacement2 = [];
             
-            foreach ($tags as $key => $value) {
+            foreach ($tagList as $key => $value) {
                 $attr = is_array($value) ? '(([ ]+[' . implode('|', $value) . ']*[ ]?=[ ]?"[ a-zA-Zа-яА-Я0-9./:_@%?\-&#;]*")*)?' : '([ ])?';
                 $tag = is_array($value) ? $key : $value;
                 $pattern1[] = '$<([/])?' . $tag . $attr . '(.*?)?>$iu';
@@ -255,7 +255,7 @@ class Template implements TemplateInterface {
      * @param string $text
      * @return string
      */
-    function clearComments (string $text) : string {
+    public function clearComment (string $text) : string {
         
         return preg_replace('/<!--[^\[].*-->/Uis', '', $text);
         
@@ -267,7 +267,7 @@ class Template implements TemplateInterface {
      * @param string $text
      * @return string
      */
-    function clearRN (string $text) : string {
+    public function clearRN (string $text) : string {
         
         return preg_replace('/\s+/', ' ', $text);
         

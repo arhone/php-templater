@@ -80,10 +80,10 @@ interface TemplateInterface {
      * htmlspecialchars() с исключениями
      *
      * @param string $text
-     * @param array $tags
+     * @param array $tagList
      * @return string
      */
-    function specialChars (string $text, array $tags = []) : string;
+    public function specialChars (string $text, array $tagList = []) : string;
 
     /**
      * Очистить от комментарий
@@ -91,7 +91,7 @@ interface TemplateInterface {
      * @param string $text
      * @return string
      */
-    function clearComments (string $text) : string;
+    public function clearComment (string $text) : string;
 
     /**
      * Очистить от переноса строк
@@ -99,7 +99,7 @@ interface TemplateInterface {
      * @param string $text
      * @return string
      */
-    function clearRN (string $text) : string;
+    public function clearRN (string $text) : string;
 
     /**
      * Задаёт конфигурацию
