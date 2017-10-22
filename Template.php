@@ -78,7 +78,7 @@ class Template implements TemplateInterface {
             
         }
 
-        throw new \Exception('Tpl: Запрашиваемый шаблон ' . implode(',', $pathList) . ' не существует');
+        throw new \Exception('Template: Запрашиваемый шаблон ' . implode(',', $pathList) . ' не существует');
 
     }
 
@@ -190,6 +190,86 @@ class Template implements TemplateInterface {
         
         $value = ob_get_clean();
         return self::$block[$name] = self::$block[$name] ?? $value;
+        
+    }
+
+    /**
+     * htmlspecialchars() с исключениями
+     * 
+     * @param string $text
+     * @param array $tags
+     * @return string
+     */
+    function specialChars (string $text, array $tags = []) : string {
+        
+        if (isset($tags['code']) || array_search('code', $tags) !== false) {
+            
+            preg_match_all('!<code[ a-zA-Zа-яА-Я0-9./"=:_@%?\-&#;]*>(.*?)</code>!isU', $text, $code);
+            if (!empty($code[0])) {
+                
+                foreach ($code[1] as $key => $v) {
+                    $code[2][$key] = htmlspecialchars($v);
+                    $code[3][$key] = '{{{code-' . $key . '}}}';
+                }
+                $text = str_replace($code[1], $code[3], $text);
+                
+            }
+            
+        }
+        
+        if (!empty($tags)) {
+            
+            $pattern1     = [];
+            $pattern2     = [];
+            $replacement1 = [];
+            $replacement2 = [];
+            
+            foreach ($tags as $key => $value) {
+                $attr = is_array($value) ? '(([ ]+[' . implode('|', $value) . ']*[ ]?=[ ]?"[ a-zA-Zа-яА-Я0-9./:_@%?\-&#;]*")*)?' : '([ ])?';
+                $tag = is_array($value) ? $key : $value;
+                $pattern1[] = '$<([/])?' . $tag . $attr . '(.*?)?>$iu';
+                $pattern2[] = '$\[([/])?' . $tag . $attr . '\]$iu';
+                $replacement1[] = '[$1' . $tag . '$2]';
+                $replacement2[] = '<$1' . $tag . '$2>';
+            }
+            
+            $text = preg_replace($pattern1, $replacement1, $text);
+            $text = htmlspecialchars($text, ENT_NOQUOTES);
+            $text = preg_replace($pattern2, $replacement2, $text);
+            
+            if (!empty($code[0])) {
+                $text = str_replace($code[3], $code[2], $text);
+            }
+            
+            return $text;
+            
+        }
+            
+        return htmlspecialchars($text);
+
+    }
+
+    /**
+     * Очистить от комментарий
+     * 
+     * @param string $text
+     * @return string
+     */
+    function clearComments (string $text) : string {
+        
+        return preg_replace('/<!--[^\[].*-->/Uis', '', $text);
+        
+    }
+
+    /**
+     * Очистить от переноса строк
+     * 
+     * @param string $text
+     * @return string
+     */
+    function clearRN (string $text) : string {
+        
+        return preg_replace('/\s+/', ' ', $text);
         
     }
     

@@ -77,6 +77,31 @@ interface TemplateInterface {
     public function end (string $name);
 
     /**
+     * htmlspecialchars() с исключениями
+     *
+     * @param string $text
+     * @param array $tags
+     * @return string
+     */
+    function specialChars (string $text, array $tags = []) : string;
+
+    /**
+     * Очистить от комментарий
+     *
+     * @param string $text
+     * @return string
+     */
+    function clearComments (string $text) : string;
+
+    /**
+     * Очистить от переноса строк
+     *
+     * @param string $text
+     * @return string
+     */
+    function clearRN (string $text) : string;
+
+    /**
      * Задаёт конфигурацию
      *
      * @param array $config
