@@ -128,7 +128,7 @@ class Template implements TemplateInterface {
      */
     public function has (string $name) {
         
-        return self::$storage[$name];
+        return isset(self::$storage[$name]);
         
     }
 

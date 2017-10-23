@@ -91,7 +91,7 @@ echo $Template->get('body'); // Тоже самое
 <?php
 
 $Template->body .= ' продолжение';
-$Template->add('body', 'продолжение'); // Тоже самое
+$Template->add('body', ' продолжение'); // Тоже самое
 
 echo $Template->body;
 ```
@@ -103,6 +103,16 @@ echo $Template->body;
 
 echo $Template->body;
 echo $Template->get('body'); // Тоже самое
+```
+
+###### Удаление содержимого
+
+```php
+<?php
+
+$Template->body = null;
+$Template->delete('body'); // Тоже самое
+unset($Template->body); // Тоже самое
 ```
 
 ###### Установка значения по умолчанию
