@@ -18,11 +18,11 @@ class Template implements TemplateInterface {
     protected $config = [];
     
     /**
-     * Блоки
+     * Хранилище блоков
      *
      * @var array
      */
-    protected static $block = [];
+    protected static $storage = [];
 
     /**
      * Template constructor.
@@ -91,7 +91,7 @@ class Template implements TemplateInterface {
      */
     public function set (string $name, $value) {
 
-        self::$block[$name] = $value;
+        self::$storage[$name] = $value;
 
     }
 
@@ -104,7 +104,7 @@ class Template implements TemplateInterface {
      */
     public function add (string $name, $value) {
 
-        self::$block[$name] = self::$block[$name] ? self::$block[$name] . $value : $value;
+        self::$storage[$name] = self::$storage[$name] ? self::$storage[$name] . $value : $value;
 
     }
 
@@ -116,7 +116,7 @@ class Template implements TemplateInterface {
      */
     public function get (string $name) {
 
-        return self::$block[$name] ?? null;
+        return self::$storage[$name] ?? null;
 
     }
 
@@ -128,7 +128,7 @@ class Template implements TemplateInterface {
      */
     public function has (string $name) {
         
-        return self::$block[$name];
+        return self::$storage[$name];
         
     }
 
@@ -140,7 +140,7 @@ class Template implements TemplateInterface {
      */
     public function delete (string $name) {
 
-        unset(self::$block[$name]);
+        unset(self::$storage[$name]);
 
     }
     
@@ -188,7 +188,7 @@ class Template implements TemplateInterface {
      */
     public function __unset (string $name) {
 
-        unset(self::$block[$name]);
+        unset(self::$storage[$name]);
 
     }
 
@@ -213,7 +213,7 @@ class Template implements TemplateInterface {
     public function end (string $name) {
         
         $value = ob_get_clean();
-        return self::$block[$name] = self::$block[$name] ?? $value;
+        return self::$storage[$name] = self::$storage[$name] ?? $value;
         
     }
 
