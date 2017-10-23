@@ -59,7 +59,15 @@ interface TemplateInterface {
      * @return mixed
      */
     public function has (string $name);
-    
+
+    /**
+     * Удаляет переменную
+     *
+     * @param string $name
+     * @return mixed
+     */
+    public function delete (string $name);
+
     /**
      * Включение буферизации вывода
      *

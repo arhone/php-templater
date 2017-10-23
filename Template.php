@@ -131,6 +131,18 @@ class Template implements TemplateInterface {
         return self::$block[$name];
         
     }
+
+    /**
+     * Удаляет переменную
+     *
+     * @param string $name
+     * @return mixed
+     */
+    public function delete (string $name) {
+
+        unset(self::$block[$name]);
+
+    }
     
     /**
      * Возвращает значение переменной
@@ -166,6 +178,18 @@ class Template implements TemplateInterface {
         
         return $this->has($name);
         
+    }
+
+    /**
+     * Удаляет переменную
+     *
+     * @param string $name
+     * @return mixed
+     */
+    public function __unset (string $name) {
+
+        unset(self::$block[$name]);
+
     }
 
     /**
