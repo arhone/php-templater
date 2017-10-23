@@ -11,7 +11,7 @@
 
 ```php
 <?php
-use arhone\template\TemplateInterface;
+use arhone\template\Template;
 include 'vendor/autoload.php';
 
 $Template = new Template();
@@ -23,7 +23,7 @@ $Template = new Template();
 
 ```php
 <?php
-use arhone\template\TemplateInterface;
+use arhone\template\Template;
 include 'vendor/autoload.php';
 
 $Template = new Template();
@@ -53,7 +53,7 @@ template/default.tpl:
 
 ```php
 <?php
-use arhone\template\TemplateInterface;
+use arhone\template\Template;
 include 'vendor/autoload.php';
 
 $Template = new Template();
@@ -131,7 +131,7 @@ unset($Template->body); // Тоже самое
 
 ```php
 <?php
-use arhone\template\TemplateInterface;
+use arhone\template\Template;
 include 'vendor/autoload.php';
 
 $Template = new Template();
