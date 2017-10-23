@@ -3,7 +3,7 @@
 
 Шаблонизатор предназначен для удобного разделения бизнес логики и логики представления.
 
-Позволяет удобно подключать файлы шаблонов и передавать в них готовые данные.
+Позволяет подключать файлы шаблонов и передавать в них готовые данные.
 
 # Установка
 
@@ -12,7 +12,6 @@
 ```php
 <?php
 use arhone\template\Template;
-
 include 'vendor/autoload.php';
 
 $Template = new Template();
@@ -25,16 +24,13 @@ $Template = new Template();
 ```php
 <?php
 use arhone\template\Template;
-
 include 'vendor/autoload.php';
 
 $Template = new Template();
 
-$data = [
+echo $Template->render(__DIR__ . '/template/default.tpl', [
     'title' => 'Мой сайт'
-];
-
-echo $Template->render(__DIR__ . '/template/default.tpl', $data);
+]);
 ```
 template/default.tpl:
 ```php
@@ -58,14 +54,13 @@ template/default.tpl:
 ```php
 <?php
 use arhone\template\Template;
-
 include 'vendor/autoload.php';
 
 $Template = new Template();
 
 echo $Template->render([
-    __DIR__ . '/template/extend/myModule/default.tpl',
-    __DIR__ . '/myModule/template/default.tpl'
+    __DIR__ . '/template/extend/myModule/default.tpl', // Новый
+    __DIR__ . '/myModule/template/default.tpl' // Стандартный
 ]); // Подключиться template/extend/myModule/default.tpl если он существует
 ```
 
@@ -82,7 +77,6 @@ $Template->body = 'Содержимое';
 $Template->set('body', 'Содержимое'); // Тоже самое
 
 echo $Template->body;
-echo $Template->get('body'); // Тоже самое
 ```
 
 ###### Дописывание содержимого в блок
@@ -138,7 +132,6 @@ unset($Template->body); // Тоже самое
 ```php
 <?php
 use arhone\template\Template;
-
 include 'vendor/autoload.php';
 
 $Template = new Template();
@@ -155,7 +148,7 @@ echo $Template->render(__DIR__ . '/slave.tpl');
 
 <?php $this->start('body')?>
     <div>Содержимое</div>
-<?$this->end('body')?>
+<?php $this->end('body')?>
 
 <?=$this->render(__DIR__ . '/default.tpl')?>
 ```
