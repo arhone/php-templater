@@ -41,21 +41,31 @@ interface TemplateInterface {
 
     /**
      * Устанавливает значение для переменной
-     * 
+     * Включение буферизации вывода
+     *
      * @param string $name
-     * @param $value
-     * @return mixed
+     * @param mixed|null $value
+     * @return mixed|void
      */
-    public function set (string $name, $value);
+    public function set (string $name, $value = null);
 
     /**
      * Дописывает значение в переменную
-     * 
+     * Включение буферизации вывода
+     *
      * @param string $name
-     * @param $value
+     * @param mixed|null $value
      * @return mixed
      */
-    public function add (string $name, $value);
+    public function add (string $name, $value = null);
+
+    /**
+     * Получить содержимое текущего буфера и удалить его
+     *
+     * @param string $name
+     * @return mixed
+     */
+    public function end (string $name);
 
     /**
      * Возвращает значение переменной
@@ -80,22 +90,6 @@ interface TemplateInterface {
      * @return mixed
      */
     public function delete (string $name);
-
-    /**
-     * Включение буферизации вывода
-     *
-     * @param string $name
-     * @return mixed
-     */
-    public function start (string $name);
-
-    /**
-     * Получить содержимое текущего буфера и удалить его
-     * 
-     * @param string $name
-     * @return mixed
-     */
-    public function end (string $name);
 
     /**
      * htmlspecialchars() с исключениями

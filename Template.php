@@ -37,6 +37,8 @@ class Template implements TemplateInterface {
      */
     protected static $storage = [];
 
+    protected static $obPosition = null;
+
     /**
      * Template constructor.
      *
@@ -52,9 +54,10 @@ class Template implements TemplateInterface {
     /**
      * Возвращает загруженный шаблон
      *
-     * @param mixed $path Путь к файлу шаблона или массив с путями
-     * @param array $data Массив с переменными
+     * @param mixed $path
+     * @param array $data
      * @return string
+     * @throws \Exception
      */
     public function render ($path, array $data = []) : string {
 
@@ -97,27 +100,71 @@ class Template implements TemplateInterface {
 
     /**
      * Устанавливает значение для переменной
+     * Включение буферизации вывода
      *
      * @param string $name
-     * @param $value
-     * @return mixed
+     * @param mixed|null $value
+     * @return mixed|void
      */
-    public function set (string $name, $value) {
+    public function set (string $name, $value = null) {
 
-        self::$storage[$name] = $value;
+        if ($value) {
+
+            self::$storage[$name] = $value;
+
+        } else {
+
+            self::$obPosition = 'set';
+            ob_start();
+
+        }
 
     }
 
     /**
      * Дописывает значение в переменную
+     * Включение буферизации вывода
      *
      * @param string $name
-     * @param $value
+     * @param mixed|null $value
      * @return mixed
      */
-    public function add (string $name, $value) {
+    public function add (string $name, $value = null) {
 
-        self::$storage[$name] = self::$storage[$name] ? self::$storage[$name] . $value : $value;
+        if ($value) {
+
+            self::$storage[$name] = isset(self::$storage[$name]) ? self::$storage[$name] . $value : $value;
+
+        } else {
+
+            self::$obPosition = 'add';
+            ob_start();
+
+        }
+
+    }
+
+    /**
+     * Получить содержимое текущего буфера и удалить его
+     *
+     * @param string $name
+     * @return mixed
+     */
+    public function end (string $name) {
+
+        $value = ob_get_clean();
+
+        if (self::$obPosition == 'add') {
+
+            self::$storage[$name] = isset(self::$storage[$name]) ? self::$storage[$name] . $value : $value;
+            self::$obPosition = null;
+
+        } else {
+
+            self::$storage[$name] = $value;
+            self::$obPosition = null;
+
+        }
 
     }
 
@@ -203,31 +250,6 @@ class Template implements TemplateInterface {
 
         unset(self::$storage[$name]);
 
-    }
-
-    /**
-     * Включение буферизации вывода
-     *
-     * @param string $name
-     * @return mixed
-     */
-    public function start (string $name) {
-        
-        ob_start();
-        
-    }
-
-    /**
-     * Получить содержимое текущего буфера и удалить его
-     *
-     * @param string $name
-     * @return mixed
-     */
-    public function end (string $name) {
-        
-        $value = ob_get_clean();
-        return self::$storage[$name] = self::$storage[$name] ?? $value;
-        
     }
 
     /**
