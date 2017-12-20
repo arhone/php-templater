@@ -118,9 +118,9 @@ unset($Template->body); // Тоже самое
  */
 ?>
 <html>
-    <title><?=$title ?? 'Заголовок'?></title>
+    <title><?=$this->title ?? 'Заголовок'?></title>
     <body>
-    <?php $this->start('body')?>
+    <?php $this->set('body')?>
         <div>Содержимое</div>
     <?=$this->end('body')?>
     </body>
