@@ -37,6 +37,17 @@ class Template implements TemplateInterface {
      */
     protected static $storage = [];
 
+    /**
+     * Значения по умолчанию
+     * @var array
+     */
+    protected static $default = [];
+
+    /**
+     * Статус позиции
+     *
+     * @var null
+     */
     protected static $obPosition = null;
 
     /**
@@ -122,6 +133,29 @@ class Template implements TemplateInterface {
     }
 
     /**
+     * Устанавливает значение для переменной
+     * Включение буферизации вывода
+     *
+     * @param string $name
+     * @param mixed|null $value
+     * @return mixed|void
+     */
+    public function default (string $name, $value = null) {
+
+        if ($value) {
+
+            self::$default[$name] = $value;
+
+        } else {
+
+            self::$obPosition = 'default';
+            ob_start();
+
+        }
+
+    }
+
+    /**
      * Дописывает значение в переменную
      * Включение буферизации вывода
      *
@@ -159,12 +193,19 @@ class Template implements TemplateInterface {
             self::$storage[$name] = isset(self::$storage[$name]) ? self::$storage[$name] . $value : $value;
             self::$obPosition = null;
 
-        } else {
+        } elseif (self::$obPosition == 'set') {
 
             self::$storage[$name] = $value;
             self::$obPosition = null;
 
+        } else {
+
+            self::$default[$name] = $value;
+            self::$obPosition = null;
+
         }
+
+        return $this->get($name);
 
     }
 
@@ -176,7 +217,7 @@ class Template implements TemplateInterface {
      */
     public function get (string $name) {
 
-        return self::$storage[$name] ?? null;
+        return self::$storage[$name] ?? self::$default[$name] ?? null;
 
     }
 

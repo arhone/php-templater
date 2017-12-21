@@ -120,11 +120,30 @@ unset($Template->body); // Тоже самое
 <html>
     <title><?=$this->title ?? 'Заголовок'?></title>
     <body>
-    <?php $this->set('body')?>
+    <?php $this->default('body')?>
         <div>Содержимое</div>
     <?=$this->end('body')?>
     </body>
 </html>
+```
+
+Метод default добавляет значение по умолчанию, это значение будет использовано в случае если свойство не было задано. 
+
+```php
+<?php
+
+$Template->body = 'Значение';
+$Template->default('body', 'По умолчанию');
+echo $Template->body; // Выведет "Значение"
+```
+
+```php
+<?php
+
+$Template->body = 'Значение';
+$Template->default('body', 'По умолчанию');
+unset($Template->body);
+echo $Template->body; // Выведет "По умолчанию"
 ```
 
 Таким образом можно переопределять блоки стандартных шаблонов
@@ -142,6 +161,7 @@ echo $Template->render(__DIR__ . '/slave.tpl');
 ```php
 <?php
 /**
+ * Шаблон slave.tpl
  * @var \arhone\template\TemplateInterface $this
  */
 ?>
@@ -151,6 +171,19 @@ echo $Template->render(__DIR__ . '/slave.tpl');
 <?php $this->end('body')?>
 
 <?=$this->render(__DIR__ . '/default.tpl')?>
+```
+
+```php
+<?php
+/**
+ * Шаблон default.tpl
+ * @var \arhone\template\TemplateInterface $this
+ */
+?>
+
+<?php $this->default('body')?>
+    Значение по умолчанию
+<?=$this->end('body')?>
 ```
 
 ##### htmlspecialchars() с исключениями

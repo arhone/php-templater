@@ -50,6 +50,16 @@ interface TemplateInterface {
     public function set (string $name, $value = null);
 
     /**
+     * Устанавливает значение для переменной по умолчанию
+     * Включение буферизации вывода
+     *
+     * @param string $name
+     * @param mixed|null $value
+     * @return mixed|void
+     */
+    public function default (string $name, $value = null);
+
+    /**
      * Дописывает значение в переменную
      * Включение буферизации вывода
      *
