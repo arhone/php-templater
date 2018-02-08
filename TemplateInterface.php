@@ -5,21 +5,9 @@ namespace arhone\template;
 /**
  * Шаблонизатор
  *
- * Class TemplateInterface
- *
- * @property string $title
- * @property string $keywords
- * @property string $description
- * @property string $meta
- * @property string $header
- * @property string $top
- * @property string $left
- * @property string $content
- * @property string $body
- * @property string $right
- * @property string $footer
- *
+ * Interface TemplateInterface
  * @package arhone\template
+ * @author Алексей Арх <info@arh.one>
  */
 interface TemplateInterface {
 
