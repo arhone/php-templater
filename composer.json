@@ -13,7 +13,8 @@
     "autoload": {
         "psr-4": {
             "arhone\\template\\": "source/"
-        }
+        },
+        "classmap": ["source/"]
     },
     "minimum-stability": "dev",
     "require": {
