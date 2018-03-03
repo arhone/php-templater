@@ -12,7 +12,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "arhone\\template\\": ""
+            "arhone\\template\\": "source/"
         },
         "classmap": [
             "TemplateInterface.php",
