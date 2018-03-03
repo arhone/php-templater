@@ -13,11 +13,7 @@
     "autoload": {
         "psr-4": {
             "arhone\\template\\": "source/"
-        },
-        "classmap": [
-            "TemplateInterface.php",
-            "Template.php"
-        ]
+        }
     },
     "minimum-stability": "dev",
     "require": {
