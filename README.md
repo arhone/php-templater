@@ -11,6 +11,7 @@
 
 ```php
 <?php
+
 use arhone\template\Template;
 include 'vendor/autoload.php';
 
@@ -23,10 +24,6 @@ $Template = new Template();
 
 ```php
 <?php
-use arhone\template\Template;
-include 'vendor/autoload.php';
-
-$Template = new Template();
 
 echo $Template->render(__DIR__ . '/template/default.tpl', [
     'title' => 'Мой сайт'
@@ -35,6 +32,7 @@ echo $Template->render(__DIR__ . '/template/default.tpl', [
 template/default.tpl:
 ```php
 <?php
+
 /**
  * @var \arhone\template\TemplateInterface $this
  * @var string $title Название сайта
@@ -53,10 +51,6 @@ template/default.tpl:
 
 ```php
 <?php
-use arhone\template\Template;
-include 'vendor/autoload.php';
-
-$Template = new Template();
 
 echo $Template->render([
     __DIR__ . '/template/extend/myModule/default.tpl', // Новый
@@ -73,6 +67,7 @@ echo $Template->render([
 
 ```php
 <?php
+
 $Template->body = 'Содержимое';
 $Template->set('body', 'Содержимое'); // Тоже самое
 
@@ -150,10 +145,6 @@ echo $Template->body; // Выведет "По умолчанию"
 
 ```php
 <?php
-use arhone\template\Template;
-include 'vendor/autoload.php';
-
-$Template = new Template();
 
 echo $Template->render(__DIR__ . '/slave.tpl');
 ```
