@@ -32,7 +32,6 @@ echo $Template->render(__DIR__ . '/template/default.tpl', [
 template/default.tpl:
 ```php
 <?php
-
 /**
  * @var \arhone\template\TemplateInterface $this
  * @var string $title Название сайта
