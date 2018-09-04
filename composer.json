@@ -1,7 +1,7 @@
 {
-    "name": "arhone/template",
-    "description": "Нативный PHP шаблонизатор",
-    "homepage": "https://github.com/arhone/template",
+    "name": "arhone/templating",
+    "description": "Библиотека для работы с шаблонами (PHP 7)",
+    "homepage": "https://github.com/arhone/templating",
     "type": "library",
     "license": "MIT",
     "authors": [
@@ -12,12 +12,12 @@
     ],
     "autoload": {
         "psr-4": {
-            "arhone\\template\\": "source/"
+            "arhone\\templating\\": "source/"
         },
         "classmap": ["source/"]
     },
     "minimum-stability": "stable",
     "require": {
-        "php": "^7.0"
+        "php": ">=7.1"
     }
 }

@@ -1,15 +1,15 @@
 <?php declare(strict_types = 1);
 
-namespace arhone\template;
+namespace arhone\templating;
 
 /**
  * Шаблонизатор
  *
- * Interface TemplateInterface
- * @package arhone\template
+ * Interface TemplaterInterface
+ * @package arhone\templating
  * @author Алексей Арх <info@arh.one>
  */
-interface TemplateInterface {
+interface TemplaterInterface {
 
     /**
      * Template constructor.
@@ -33,9 +33,9 @@ interface TemplateInterface {
      *
      * @param string $name
      * @param mixed|null $value
-     * @return mixed|void
+     * @return void
      */
-    public function set (string $name, $value = null);
+    public function set (string $name, $value = null) : void;
 
     /**
      * Устанавливает значение для переменной по умолчанию
@@ -43,9 +43,9 @@ interface TemplateInterface {
      *
      * @param string $name
      * @param mixed|null $value
-     * @return mixed|void
+     * @return void
      */
-    public function default (string $name, $value = null);
+    public function default (string $name, $value = null) : void;
 
     /**
      * Дописывает значение в переменную
@@ -53,17 +53,17 @@ interface TemplateInterface {
      *
      * @param string $name
      * @param mixed|null $value
-     * @return mixed
+     * @return void
      */
-    public function add (string $name, $value = null);
+    public function add (string $name, $value = null) : void;
 
     /**
      * Получить содержимое текущего буфера и удалить его
      *
      * @param string $name
-     * @return mixed
+     * @return void
      */
-    public function end (string $name);
+    public function end (string $name) : void;
 
     /**
      * Возвращает значение переменной
@@ -85,9 +85,9 @@ interface TemplateInterface {
      * Удаляет переменную
      *
      * @param string $name
-     * @return mixed
+     * @return void
      */
-    public function delete (string $name);
+    public function delete (string $name) : void;
 
     /**
      * htmlspecialchars() с исключениями

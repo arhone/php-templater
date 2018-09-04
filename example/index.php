@@ -1,12 +1,14 @@
 <?php
-use arhone\template\Template;
+
+use arhone\templating\Templater;
+
 include '../vendor/autoload.php';
 
-$Template = new Template();
+$Templater = new Templater();
 
 try {
 
-    echo $Template->render([
+    echo $Templater->render([
         __DIR__ . '/template/new.tpl',
         __DIR__ . '/template/default.tpl'
     ], [

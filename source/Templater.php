@@ -1,15 +1,15 @@
 <?php declare(strict_types = 1);
 
-namespace arhone\template;
+namespace arhone\templating;
 
 /**
  * Шаблонизатор
  *
- * Class Template
- * @package arhone\template
+ * Class Templater
+ * @package arhone\templating
  * @author Алексей Арх <info@arh.one>
  */
-class Template implements TemplateInterface {
+class Templater implements TemplaterInterface {
 
     /**
      * Настройки класса
@@ -103,9 +103,9 @@ class Template implements TemplateInterface {
      *
      * @param string $name
      * @param mixed|null $value
-     * @return mixed|void
+     * @return void
      */
-    public function set (string $name, $value = null) {
+    public function set (string $name, $value = null) : void {
 
         if ($value) {
 
@@ -126,9 +126,9 @@ class Template implements TemplateInterface {
      *
      * @param string $name
      * @param mixed|null $value
-     * @return mixed|void
+     * @return void
      */
-    public function default (string $name, $value = null) {
+    public function default (string $name, $value = null) : void {
 
         if ($value) {
 
@@ -149,9 +149,9 @@ class Template implements TemplateInterface {
      *
      * @param string $name
      * @param mixed|null $value
-     * @return mixed
+     * @return void
      */
-    public function add (string $name, $value = null) {
+    public function add (string $name, $value = null) : void {
 
         if ($value) {
 
@@ -213,9 +213,9 @@ class Template implements TemplateInterface {
      * Проверяет существование переменной
      *
      * @param string $name
-     * @return mixed
+     * @return bool
      */
-    public function has (string $name) {
+    public function has (string $name) : bool {
         
         return isset(self::$storage[$name]);
         
@@ -225,9 +225,9 @@ class Template implements TemplateInterface {
      * Удаляет переменную
      *
      * @param string $name
-     * @return mixed
+     * @return void
      */
-    public function delete (string $name) {
+    public function delete (string $name) : void {
 
         unset(self::$storage[$name]);
 
@@ -247,7 +247,7 @@ class Template implements TemplateInterface {
 
     /**
      * Устанавливает значение переменной
-     * 
+     *
      * @param string $name
      * @param $value
      */
