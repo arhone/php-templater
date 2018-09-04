@@ -61,9 +61,9 @@ interface TemplaterInterface {
      * Получить содержимое текущего буфера и удалить его
      *
      * @param string $name
-     * @return void
+     * @return mixed
      */
-    public function end (string $name) : void;
+    public function end (string $name);
 
     /**
      * Возвращает значение переменной
