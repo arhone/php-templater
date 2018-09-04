@@ -1,4 +1,4 @@
-# Template
+# Templater
 Нативный шаблонизатор (PHP 7)
 
 Шаблонизатор предназначен для удобного разделения бизнес логики и логики представления.
@@ -7,15 +7,15 @@
 
 # Установка
 
-```composer require arhone/template```
+```composer require arhone/templating```
 
 ```php
 <?php
 
-use arhone\template\Template;
+use arhone\templating\Templater;
 include 'vendor/autoload.php';
 
-$Template = new Template();
+$Template = new Templater();
 ```
 
 # Примеры
@@ -25,7 +25,7 @@ $Template = new Template();
 ```php
 <?php
 
-echo $Template->render(__DIR__ . '/template/default.tpl', [
+echo $Templater->render(__DIR__ . '/template/default.tpl', [
     'title' => 'Мой сайт'
 ]);
 ```
@@ -33,7 +33,7 @@ template/default.tpl:
 ```php
 <?php
 /**
- * @var \arhone\template\TemplateInterface $this
+ * @var \arhone\templating\TemplaterInterface $this
  * @var string $title Название сайта
  */
 ?>
@@ -51,7 +51,7 @@ template/default.tpl:
 ```php
 <?php
 
-echo $Template->render([
+echo $Templater->render([
     __DIR__ . '/template/extend/myModule/default.tpl', // Новый
     __DIR__ . '/myModule/template/default.tpl' // Стандартный
 ]); // Подключиться template/extend/myModule/default.tpl если он существует
@@ -67,10 +67,10 @@ echo $Template->render([
 ```php
 <?php
 
-$Template->body = 'Содержимое';
-$Template->set('body', 'Содержимое'); // Тоже самое
+$Templater->body = 'Содержимое';
+$Templater->set('body', 'Содержимое'); // Тоже самое
 
-echo $Template->body;
+echo $Templater->body;
 ```
 
 ###### Дописывание содержимого в блок
@@ -78,10 +78,10 @@ echo $Template->body;
 ```php
 <?php
 
-$Template->body .= ' продолжение';
-$Template->add('body', ' продолжение'); // Тоже самое
+$Templater->body .= ' продолжение';
+$Templater->add('body', ' продолжение'); // Тоже самое
 
-echo $Template->body;
+echo $Templater->body;
 ```
 
 ###### Получение содержимого
@@ -89,8 +89,8 @@ echo $Template->body;
 ```php
 <?php
 
-echo $Template->body;
-echo $Template->get('body'); // Тоже самое
+echo $Templater->body;
+echo $Templater->get('body'); // Тоже самое
 ```
 
 ###### Удаление содержимого
@@ -98,9 +98,9 @@ echo $Template->get('body'); // Тоже самое
 ```php
 <?php
 
-$Template->body = null;
-$Template->delete('body'); // Тоже самое
-unset($Template->body); // Тоже самое
+$Templater->body = null;
+$Templater->delete('body'); // Тоже самое
+unset($Templater->body); // Тоже самое
 ```
 
 ###### Установка значения по умолчанию
@@ -108,7 +108,7 @@ unset($Template->body); // Тоже самое
 ```php
 <?php
 /**
- * @var \arhone\template\TemplateInterface $this
+ * @var \arhone\templating\TemplatingInterface $this
  */
 ?>
 <html>
@@ -126,18 +126,18 @@ unset($Template->body); // Тоже самое
 ```php
 <?php
 
-$Template->body = 'Значение';
-$Template->default('body', 'По умолчанию');
-echo $Template->body; // Выведет "Значение"
+$Templater->body = 'Значение';
+$Templater->default('body', 'По умолчанию');
+echo $Templater->body; // Выведет "Значение"
 ```
 
 ```php
 <?php
 
-$Template->body = 'Значение';
-$Template->default('body', 'По умолчанию');
-unset($Template->body);
-echo $Template->body; // Выведет "По умолчанию"
+$Templater->body = 'Значение';
+$Templater->default('body', 'По умолчанию');
+unset($Templater->body);
+echo $Templater->body; // Выведет "По умолчанию"
 ```
 
 Таким образом можно переопределять блоки стандартных шаблонов
@@ -145,14 +145,14 @@ echo $Template->body; // Выведет "По умолчанию"
 ```php
 <?php
 
-echo $Template->render(__DIR__ . '/slave.tpl');
+echo $Templater->render(__DIR__ . '/slave.tpl');
 ```
 
 ```php
 <?php
 /**
  * Шаблон slave.tpl
- * @var \arhone\template\TemplateInterface $this
+ * @var \arhone\templating\TemplatingInterface $this
  */
 ?>
 
@@ -167,7 +167,7 @@ echo $Template->render(__DIR__ . '/slave.tpl');
 <?php
 /**
  * Шаблон default.tpl
- * @var \arhone\template\TemplateInterface $this
+ * @var \arhone\templating\TemplatingInterface $this
  */
 ?>
 
@@ -183,7 +183,7 @@ echo $Template->render(__DIR__ . '/slave.tpl');
 ```php
 <?php
 /**
- * @var \arhone\template\TemplateInterface $this
+ * @var \arhone\templating\TemplatingInterface $this
  */
 ?>
 
