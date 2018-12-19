@@ -15,7 +15,7 @@
 use arhone\templating\Templater;
 include 'vendor/autoload.php';
 
-$Template = new Templater();
+$templater = new Templater();
 ```
 
 # Примеры
@@ -25,7 +25,7 @@ $Template = new Templater();
 ```php
 <?php
 
-echo $Templater->render(__DIR__ . '/template/default.tpl', [
+echo $templater->render(__DIR__ . '/template/default.tpl', [
     'title' => 'Мой сайт'
 ]);
 ```
@@ -51,7 +51,7 @@ template/default.tpl:
 ```php
 <?php
 
-echo $Templater->render([
+echo $templater->render([
     __DIR__ . '/template/extend/myModule/default.tpl', // Новый
     __DIR__ . '/myModule/template/default.tpl' // Стандартный
 ]); // Подключиться template/extend/myModule/default.tpl если он существует
@@ -67,10 +67,10 @@ echo $Templater->render([
 ```php
 <?php
 
-$Templater->body = 'Содержимое';
-$Templater->set('body', 'Содержимое'); // Тоже самое
+$templater->body = 'Содержимое';
+$templater->set('body', 'Содержимое'); // Тоже самое
 
-echo $Templater->body;
+echo $templater->body;
 ```
 
 ###### Дописывание содержимого в блок
@@ -78,10 +78,10 @@ echo $Templater->body;
 ```php
 <?php
 
-$Templater->body .= ' продолжение';
-$Templater->add('body', ' продолжение'); // Тоже самое
+$templater->body .= ' продолжение';
+$templater->add('body', ' продолжение'); // Тоже самое
 
-echo $Templater->body;
+echo $templater->body;
 ```
 
 ###### Получение содержимого
@@ -89,8 +89,8 @@ echo $Templater->body;
 ```php
 <?php
 
-echo $Templater->body;
-echo $Templater->get('body'); // Тоже самое
+echo $templater->body;
+echo $templater->get('body'); // Тоже самое
 ```
 
 ###### Удаление содержимого
@@ -98,9 +98,9 @@ echo $Templater->get('body'); // Тоже самое
 ```php
 <?php
 
-$Templater->body = null;
-$Templater->delete('body'); // Тоже самое
-unset($Templater->body); // Тоже самое
+$templater->body = null;
+$templater->delete('body'); // Тоже самое
+unset($templater->body); // Тоже самое
 ```
 
 ###### Установка значения по умолчанию
@@ -126,18 +126,18 @@ unset($Templater->body); // Тоже самое
 ```php
 <?php
 
-$Templater->body = 'Значение';
-$Templater->default('body', 'По умолчанию');
-echo $Templater->body; // Выведет "Значение"
+$templater->body = 'Значение';
+$templater->default('body', 'По умолчанию');
+echo $templater->body; // Выведет "Значение"
 ```
 
 ```php
 <?php
 
-$Templater->body = 'Значение';
-$Templater->default('body', 'По умолчанию');
-unset($Templater->body);
-echo $Templater->body; // Выведет "По умолчанию"
+$templater->body = 'Значение';
+$templater->default('body', 'По умолчанию');
+unset($templater->body);
+echo $templater->body; // Выведет "По умолчанию"
 ```
 
 Таким образом можно переопределять блоки стандартных шаблонов
@@ -145,7 +145,7 @@ echo $Templater->body; // Выведет "По умолчанию"
 ```php
 <?php
 
-echo $Templater->render(__DIR__ . '/slave.tpl');
+echo $templater->render(__DIR__ . '/slave.tpl');
 ```
 
 ```php

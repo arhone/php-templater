@@ -4,20 +4,30 @@ use arhone\templating\Templater;
 
 include '../vendor/autoload.php';
 
-$Templater = new Templater();
+$templater = new Templater();
 
 try {
 
-    echo $Templater->render([
+    echo $templater->render([
         __DIR__ . '/template/new.tpl',
         __DIR__ . '/template/default.tpl'
     ], [
         'title' => 'Мой сайт'
     ]);
 
-} catch (Exception $E) {
+    /*$template = $templater->load(__DIR__ . '/template/default.tpl');
+    if ($template->isLoaded()) {
 
-    echo $E->getMessage();
+        echo $template->render(null, [
+            'title' => 'Заголовок'
+        ]);
+
+    }*/
+
+
+} catch (Exception $exception) {
+
+    echo $exception->getMessage();
 
 }
 

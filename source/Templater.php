@@ -27,9 +27,17 @@ class Templater implements TemplaterInterface {
 
     /**
      * Значения по умолчанию
+     *
      * @var array
      */
     protected static $default = [];
+
+    /**
+     * Путь к шаблону
+     *
+     * @var array
+     */
+    protected $path = null;
 
     /**
      * Статус позиции
@@ -53,16 +61,20 @@ class Templater implements TemplaterInterface {
     /**
      * Возвращает загруженный шаблон
      *
-     * @param mixed $path
+     * @param null|string|array $path
      * @param array $data
      * @return string
      * @throws \Exception
      */
     public function render ($path, array $data = []) : string {
 
+        if ($this->path) {
+            $this->load($path);
+        }
+
         ob_start();
-            extract($data);
-            include $this->getPath($path);
+        extract($data);
+        include $this->$path;
         return ob_get_clean();
 
     }
@@ -71,10 +83,10 @@ class Templater implements TemplaterInterface {
      * Получение пути к файлу шаблона
      *
      * @param string|array $path
-     * @return string
+     * @return $this
      * @throws \Exception
      */
-    protected function getPath ($path) : string {
+    public function load ($path) {
 
         $pathList = [];
         if (is_string($path)) {
@@ -87,7 +99,8 @@ class Templater implements TemplaterInterface {
 
             if (is_file($path)) {
 
-                return $path;
+                $this->path = $path;
+                return $this;
 
             }
             
