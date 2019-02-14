@@ -2,6 +2,6 @@
 
 return [
     'Templater' => [
-        'class' => 'arhone\templating\templater\Templater'
+        'class' => 'arhone\templater\Templater'
     ]
 ];

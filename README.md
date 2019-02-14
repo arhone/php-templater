@@ -12,7 +12,7 @@
 ```php
 <?php
 
-use arhone\templating\templater\Templater;
+use arhone\templater\Templater;
 include 'vendor/autoload.php';
 
 $templater = new Templater();
@@ -33,7 +33,7 @@ template/default.tpl:
 ```php
 <?php
 /**
- * @var \arhone\templating\templater\TemplaterInterface $this
+ * @var \arhone\templater\TemplaterInterface $this
  * @var string $title Название сайта
  */
 ?>
@@ -108,7 +108,7 @@ unset($templater->body); // Тоже самое
 ```php
 <?php
 /**
- * @var \arhone\templating\templater\TemplatingInterface $this
+ * @var \arhone\templater\TemplatingInterface $this
  */
 ?>
 <html>
@@ -152,7 +152,7 @@ echo $templater->render(__DIR__ . '/slave.tpl');
 <?php
 /**
  * Шаблон slave.tpl
- * @var \arhone\templating\templater\TemplatingInterface $this
+ * @var \arhone\templater\TemplatingInterface $this
  */
 ?>
 
@@ -167,7 +167,7 @@ echo $templater->render(__DIR__ . '/slave.tpl');
 <?php
 /**
  * Шаблон default.tpl
- * @var \arhone\templating\templater\TemplatingInterface $this
+ * @var \arhone\templater\TemplatingInterface $this
  */
 ?>
 
@@ -183,7 +183,7 @@ echo $templater->render(__DIR__ . '/slave.tpl');
 ```php
 <?php
 /**
- * @var \arhone\templating\templater\TemplatingInterface $this
+ * @var \arhone\templater\TemplatingInterface $this
  */
 ?>
 
