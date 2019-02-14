@@ -1,12 +1,12 @@
 <?php declare(strict_types = 1);
 
-namespace arhone\templating;
+namespace arhone\templating\templater;
 
 /**
  * Шаблонизатор
  *
  * Interface TemplaterInterface
- * @package arhone\templating
+ * @package arhone\templating\templater
  * @author Алексей Арх <info@arh.one>
  */
 interface TemplaterInterface {

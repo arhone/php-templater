@@ -1,6 +1,6 @@
 <?php
 
-use arhone\templating\Templater;
+use arhone\templating\templater\Templater;
 
 include '../vendor/autoload.php';
 
