@@ -7,7 +7,7 @@
 
 # Установка
 
-```composer require arhone/templating```
+```composer require arhone/templater```
 
 ```php
 <?php
